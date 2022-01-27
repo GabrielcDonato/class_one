@@ -10,17 +10,76 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   int indexBottomNavigationBar = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("AppBar"),
+      ),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: Text("Gabriel"),
+            accountEmail: Text(
+              "gabrielcdonato@gmai.com",
+            ),
+            currentAccountPicture: CircleAvatar(
+              child: Text(
+                "G",
+              ),
+              backgroundColor: Colors.amber,
+            ),
+          ),
+          ListTile(
+            title: Text("Item 1"),
+            trailing: Icon(
+              Icons.arrow_forward,
+            ),
+            onTap: () {
+              _pageController.jumpToPage(0);
+              Navigator.pop(context);
+              setState(() {
+                indexBottomNavigationBar = 0;
+              });
+            },
+          ),
+          ListTile(
+            title: Text("Item 2"),
+            trailing: Icon(
+              Icons.arrow_forward,
+            ),
+            onTap: () {
+              _pageController.jumpToPage(1);
+              Navigator.pop(context);
+              setState(() {
+                indexBottomNavigationBar = 1;
+              });
+            },
+          ),
+          ListTile(
+            title: Text("Item 3"),
+            trailing: Icon(
+              Icons.arrow_forward,
+            ),
+            onTap: () {
+              _pageController.jumpToPage(2);
+              Navigator.pop(context);
+              setState(() {
+                indexBottomNavigationBar = 2;
+              });
+            },
+          ),
+        ],
+      )),
       body: PageView(
         controller: _pageController,
         children: [
-          OnePage(),
+          const OnePage(),
           Container(color: Colors.blue),
           Container(color: Colors.yellow),
         ],
